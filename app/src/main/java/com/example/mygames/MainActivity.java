@@ -12,9 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    int count, num, amount;
+    int count, num;
     int[] array = new int[9];
-    boolean ii = false;
     String text = "";
 
     @Override
@@ -274,23 +273,11 @@ public class MainActivity extends AppCompatActivity {
         final ImageView image7 = findViewById(R.id.imageView7);
         final ImageView image8 = findViewById(R.id.imageView8);
         final ImageView image9 = findViewById(R.id.imageView9);
-        final LinearLayout parent = findViewById(R.id.parent);
-        final LinearLayout ll3x3 = findViewById(R.id.xo3x3);
-        final LinearLayout ll4x4 = findViewById(R.id.xo4x4);
-        final CheckBox cb4x4 = findViewById(R.id.cb4x4);
-        final CheckBox cbii = findViewById(R.id.cbii);
 
-        if (cb4x4.isChecked()) amount = 4; else amount = 3;
-        ii = cbii.isChecked();
-
-        int[] array = new int[amount*amount];
         count = 1;
         num = 1;
 
-        for (int i = 0; i < amount*amount; i++) array[i] = 0;
-
-        parent.removeAllViews();
-        if (amount == 3) getLayoutInflater().inflate(R.layout.fragment_xo3x3, parent); else getLayoutInflater().inflate(R.layout.fragment_xo4x4, parent);
+        for (int i = 0; i < 9; i++) array[i] = 0;
 
         image1.setClickable(true);
         image2.setClickable(true);
