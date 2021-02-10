@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/singleplayer_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Singleplayer" />
+
+    <Button
+        android:id="@+id/multiplayer_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Multiplayer" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Exit" />
+</LinearLayout>

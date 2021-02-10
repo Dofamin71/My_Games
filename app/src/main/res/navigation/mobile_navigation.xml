@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mobile_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/action_start">
 
+    <fragment
+        android:id="@+id/action_start"
+        android:name="com.example.tic_tac_toe.ui.StartFragment"
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_start" >
+
+        <action
+            android:id="@+id/action_start_to_game"
+            app:destination="@id/action_game" />
+
+        <action
+            android:id="@+id/action_start_to_lobby"
+            app:destination="@id/action_lobby" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_game"
+        android:name="com.example.tic_tac_toe.ui.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/fragment_game" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_lobby"
+        android:name="com.example.tic_tac_toe.ui.LobbyFragment"
+        android:label="LobbyFragment"
+        tools:layout="@layout/fragment_lobby">
+
+        <action
+            android:id="@+id/action_lobby_to_game"
+            app:destination="@id/action_game" />
+    </fragment>
 </navigation>
