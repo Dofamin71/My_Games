@@ -2,35 +2,26 @@ package com.example.tic_tac_toe.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Matrix;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import com.example.tic_tac_toe.MainActivity;
 import com.example.tic_tac_toe.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
 import static com.example.tic_tac_toe.MainActivity.APP_PREFERENCES;
 import static com.example.tic_tac_toe.MainActivity.mDatabase;
 import static com.example.tic_tac_toe.MainActivity.ref;
