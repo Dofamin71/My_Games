@@ -21,6 +21,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.example.tic_tac_toe.MainActivity.APP_PREFERENCES;
 import static com.example.tic_tac_toe.MainActivity.mDatabase;
@@ -30,37 +31,57 @@ public class GameFragment extends Fragment {
     public GameFragment() {
         super(R.layout.fragment_game);
     }
-    public int online, count, num, player;
-    ArrayList<Integer> array = new ArrayList<Integer>(), asd = new ArrayList<Integer>();
+    public int online, count, num, player, id;
+    ArrayList<Integer> array = new ArrayList<>(), asd = new ArrayList<>();
     ArrayList imageList = new ArrayList();
     ImageView imageView;
     TextView title;
     String text = "", name;
+    boolean flag = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_game, container, false);
-        TextView textView = root.findViewById(R.id.textView2);
+        final TextView textView = root.findViewById(R.id.textView2);
 
-        final SharedPreferences preferences = this.getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences preferences = this.requireActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
 
         online = preferences.getInt("online", 2);
+        id = preferences.getInt("id", 0);
         name = preferences.getString("name", null);
-        player = preferences.getInt("amount", 2);
-        if (player == 2) ref.child(name).child("amount").setValue(2);
+        editor.putString("back", name);
+        editor.apply();
 
-        switch (online) {
-            case 0:
-                textView.setText("Offline mode");
-                break;
-            case 1:
-                textView.setText("Online mode");
-                break;
-            default:
-                textView.setText("Something is wrong...");
-                break;
-        }
+        if (flag && online == 1) ref.child("roomsList").child(String.valueOf(id)).child("amount").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<Integer> t = new GenericTypeIndicator<Integer>() {};
+                if (flag) {
+                    player = dataSnapshot.getValue(t);
+                    player++;
+                    if (player <= 2){
+                        ref.child("roomsList").child(String.valueOf(id)).child("amount").setValue(player);
+                        switch (player) {
+                            case 1:
+                                textView.setText("Вы первый игрок");
+                                break;
+                            case 2:
+                                textView.setText("Вы второй игрок");
+                                break;
+                        }
+                        flag = false;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+        if (online == 0) textView.setText("Offline mode");
 
         imageList.clear();
         final ImageView image1 = root.findViewById(R.id.imageView1);
@@ -100,7 +121,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(0, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("0").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("0").setValue(num);
                     next(0);
                 }
             }
@@ -111,7 +132,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(1, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("1").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("1").setValue(num);
                     next(1);
                 }
             }
@@ -122,7 +143,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(2, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("2").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("2").setValue(num);
                     next(2);
                 }
             }
@@ -133,7 +154,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(3, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("3").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("3").setValue(num);
                     next(3);
                 }
             }
@@ -144,7 +165,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(4, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("4").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("4").setValue(num);
                     next(4);
                 }
             }
@@ -155,7 +176,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(5, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("5").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("5").setValue(num);
                     next(5);
                 }
             }
@@ -166,7 +187,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(6, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("6").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("6").setValue(num);
                     next(6);
                 }
             }
@@ -177,7 +198,7 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(7, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("7").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("7").setValue(num);
                     next(7);
                 }
             }
@@ -188,18 +209,19 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 if (num == player && online == 1 || online == 0) {
                     array.set(8, num);
-                    if (online == 1) mDatabase.child("rooms").child(name).child("matrix").child("8").setValue(num);
+                    if (online == 1) mDatabase.child("rooms").child(name).child("8").setValue(num);
                     next(8);
                 }
             }
         });
 
         if (online == 1) {
-            ref.child(name).child("matrix").addValueEventListener(new ValueEventListener() {
+            ref.child(name).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {};
                     asd = dataSnapshot.getValue(t);
+                    assert asd != null;
                     update(asd);
                 }
 
@@ -287,7 +309,7 @@ public class GameFragment extends Fragment {
         array.clear();
         for (int i = 0; i < 9; ++i) array.add(i, 0);
 
-        if (online == 1) mDatabase.child("rooms").child(name).child("matrix").setValue(array);
+        if (online == 1) mDatabase.child("rooms").child(name).setValue(array);
 
         for (int i = 0; i < 9; ++i) {
             imageView = (ImageView) imageList.get(i);
