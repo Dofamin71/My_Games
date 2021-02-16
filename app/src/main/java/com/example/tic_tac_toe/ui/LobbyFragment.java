@@ -41,7 +41,7 @@ public class LobbyFragment extends Fragment {
         super(R.layout.fragment_game);
     }
 
-    String name = "Default name", back = null;
+    String name = "", back = null;
     int amount = 0;
     ArrayList<Room> roomsList = new ArrayList<>();
     LinearLayout cardLayout;
@@ -81,7 +81,7 @@ public class LobbyFragment extends Fragment {
                             amount--;
                         }
                         roomsList.get(i).setAmount(amount);
-                        create(matrix, scrollLayout, i, preferences, editor);
+                        create(scrollLayout, i, preferences, editor);
                     }
                 }
             }
@@ -112,10 +112,11 @@ public class LobbyFragment extends Fragment {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!name.equals("Default name") && !contains(roomsList, name)) {
+                if (!name.equals("") && !contains(roomsList, name)) {
                     Room room = new Room(name, 0);
+                    editName.setText("");
                     roomsList.add(room);
-                    create(matrix, scrollLayout, roomsList.size()-1, preferences, editor);
+                    create(scrollLayout, roomsList.size()-1, preferences, editor);
                 }
             }
         });
@@ -123,8 +124,7 @@ public class LobbyFragment extends Fragment {
     }
 
     @SuppressLint({"ResourceAsColor", "SetTextI18n", "RtlHardcoded"})
-    private void create(ArrayList<Integer> matrix, LinearLayout scrollLayout, final int index, SharedPreferences preferences, final SharedPreferences.Editor editor) {
-        ref.child(name).setValue(matrix);
+    private void create(LinearLayout scrollLayout, final int index, SharedPreferences preferences, final SharedPreferences.Editor editor) {
         ref.child("roomsList").setValue(roomsList);
 
         final CardView cardView = new CardView(context);

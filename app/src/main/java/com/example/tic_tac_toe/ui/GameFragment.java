@@ -221,8 +221,7 @@ public class GameFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {};
                     asd = dataSnapshot.getValue(t);
-                    assert asd != null;
-                    update(asd);
+                    if (asd != null) update(asd);
                 }
 
                 @Override
