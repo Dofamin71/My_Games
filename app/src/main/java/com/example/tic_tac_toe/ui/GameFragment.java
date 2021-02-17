@@ -21,7 +21,6 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static com.example.tic_tac_toe.MainActivity.APP_PREFERENCES;
 import static com.example.tic_tac_toe.MainActivity.mDatabase;

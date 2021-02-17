@@ -79,9 +79,14 @@ public class LobbyFragment extends Fragment {
                             editor.apply();
                             back = null;
                             amount--;
+                            ref.child(name).removeValue();
+                            roomsList.remove(i);
+                            ref.child("roomsList").setValue(roomsList);
                         }
-                        roomsList.get(i).setAmount(amount);
-                        create(scrollLayout, i, preferences, editor);
+                        else {
+                            roomsList.get(i).setAmount(amount);
+                            create(scrollLayout, i, preferences, editor);
+                        }
                     }
                 }
             }
@@ -91,6 +96,8 @@ public class LobbyFragment extends Fragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+
 
         editName.addTextChangedListener(new TextWatcher() {
             @Override
